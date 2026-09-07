@@ -74,9 +74,9 @@ Example automation:
 ```yaml
 trigger:
   - platform: mqtt
-    topic: home/iptv/channels/espn_us/current
+    topic: home/iptv/channels/bet/current
     value_template: "{{ value_json.title }}"
-    payload: "Monday Night Football"
+    payload: "Music Videos"
 ```
 
 ## Development
