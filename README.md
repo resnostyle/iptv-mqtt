@@ -45,18 +45,18 @@ docker compose up -d
 | `home/iptv/channels/{slug}/current` | Per-channel now playing |
 | `home/iptv/summary` | Channel and on-air counts |
 
-Slug is the channel `tvg-id` with `.` replaced by `_` (e.g. `espn.us` → `espn_us`).
+Slug is the channel `tvg-id` with `.` replaced by `_` (e.g. `channel.us` → `channel_us`).
 
 ### Per-channel payload
 
 ```json
 {
-  "tvg_id": "espn.us",
-  "name": "US: ESPN",
-  "group": "US Sports",
-  "logo": "https://example.com/logos/espn.png",
-  "title": "SportsCenter",
-  "desc": "Live sports news and highlights.",
+  "tvg_id": "channel.us",
+  "name": "Example Channel",
+  "group": "Example Group",
+  "logo": "https://example.com/logos/channel.png",
+  "title": "Example Show",
+  "desc": "Show description.",
   "lang": "en",
   "start": "2026-09-01T20:30:00Z",
   "stop": "2026-09-02T01:00:00Z",
@@ -67,16 +67,16 @@ Slug is the channel `tvg-id` with `.` replaced by `_` (e.g. `espn.us` → `espn_
 
 ## Home Assistant
 
-Discovery creates one `sensor` per channel, grouped under devices named by M3U group (e.g. "US Sports"). The sensor state is the show title; full JSON is available as attributes.
+Discovery creates one `sensor` per channel, grouped under devices named by M3U group. The sensor state is the show title; full JSON is available as attributes.
 
 Example automation:
 
 ```yaml
 trigger:
   - platform: mqtt
-    topic: home/iptv/channels/bet/current
+    topic: home/iptv/channels/channel_us/current
     value_template: "{{ value_json.title }}"
-    payload: "Music Videos"
+    payload: "Example Show"
 ```
 
 ## Development

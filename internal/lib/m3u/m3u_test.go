@@ -3,9 +3,9 @@ package m3u
 import "testing"
 
 const sampleM3U = `#EXTM3U
-#EXTINF:-1 tvg-id="espn.us" tvg-name="US: ESPN" tvg-logo="https://example.com/espn.png" group-title="US Sports",US: ESPN
+#EXTINF:-1 tvg-id="channel_a.us" tvg-name="Channel A" tvg-logo="https://example.com/channel_a.png" group-title="Example Group",Channel A
 http://example.com/stream/1
-#EXTINF:-1 tvg-id="foxsports1.us" tvg-name="US: Fox Sports 1" group-title="US Sports",US: Fox Sports 1
+#EXTINF:-1 tvg-id="channel_b.us" tvg-name="Channel B" group-title="Example Group",Channel B
 http://example.com/stream/2
 `
 
@@ -14,13 +14,13 @@ func TestParseExtractsChannels(t *testing.T) {
 	if len(channels) != 2 {
 		t.Fatalf("got %d channels want 2", len(channels))
 	}
-	if channels[0].TVGID != "espn.us" {
+	if channels[0].TVGID != "channel_a.us" {
 		t.Fatalf("tvgId: got %q", channels[0].TVGID)
 	}
-	if channels[0].Name != "US: ESPN" {
+	if channels[0].Name != "Channel A" {
 		t.Fatalf("name: got %q", channels[0].Name)
 	}
-	if channels[0].Group != "US Sports" {
+	if channels[0].Group != "Example Group" {
 		t.Fatalf("group: got %q", channels[0].Group)
 	}
 	if channels[0].URL != "http://example.com/stream/1" {

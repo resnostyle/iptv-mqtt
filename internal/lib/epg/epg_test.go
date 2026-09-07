@@ -7,18 +7,18 @@ import (
 
 const sampleXML = `<?xml version="1.0" encoding="UTF-8"?>
 <tv>
-  <programme start="20260101000000 +0000" stop="20260101120000 +0000" channel="espn.us">
+  <programme start="20260101000000 +0000" stop="20260101120000 +0000" channel="channel_a.us">
     <title>Morning Show</title>
   </programme>
-  <programme start="20260101120000 +0000" stop="20260101150000 +0000" channel="espn.us">
-    <title>Afternoon Game</title>
+  <programme start="20260101120000 +0000" stop="20260101150000 +0000" channel="channel_a.us">
+    <title>Afternoon Show</title>
   </programme>
-  <programme start="20260101120000 +0000" stop="20260101130000 +0000" channel="fox.us">
-    <title lang="en">Fox News Hour</title>
+  <programme start="20260101120000 +0000" stop="20260101130000 +0000" channel="channel_b.us">
+    <title lang="en">News Hour</title>
   </programme>
-  <programme start="20260101120000 +0000" stop="20260101130000 +0000" channel="zdf.de">
-    <title lang="de">heute journal</title>
-    <desc lang="de">Nachrichten aus Deutschland</desc>
+  <programme start="20260101120000 +0000" stop="20260101130000 +0000" channel="channel_c.de">
+    <title lang="de">Abendnachrichten</title>
+    <desc lang="de">Nachrichtenbeschreibung</desc>
   </programme>
 </tv>
 `
@@ -40,19 +40,19 @@ func TestParseNowPlaying(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if result["espn.us"].Title != "Afternoon Game" {
-		t.Fatalf("espn title: got %q", result["espn.us"].Title)
+	if result["channel_a.us"].Title != "Afternoon Show" {
+		t.Fatalf("channel_a title: got %q", result["channel_a.us"].Title)
 	}
-	if result["fox.us"].Title != "Fox News Hour" {
-		t.Fatalf("fox title: got %q", result["fox.us"].Title)
+	if result["channel_b.us"].Title != "News Hour" {
+		t.Fatalf("channel_b title: got %q", result["channel_b.us"].Title)
 	}
-	if result["fox.us"].Lang != "en" {
-		t.Fatalf("fox lang: got %q", result["fox.us"].Lang)
+	if result["channel_b.us"].Lang != "en" {
+		t.Fatalf("channel_b lang: got %q", result["channel_b.us"].Lang)
 	}
-	if result["zdf.de"].Lang != "de" {
-		t.Fatalf("zdf lang: got %q", result["zdf.de"].Lang)
+	if result["channel_c.de"].Lang != "de" {
+		t.Fatalf("channel_c lang: got %q", result["channel_c.de"].Lang)
 	}
-	if result["zdf.de"].Desc != "Nachrichten aus Deutschland" {
-		t.Fatalf("zdf desc: got %q", result["zdf.de"].Desc)
+	if result["channel_c.de"].Desc != "Nachrichtenbeschreibung" {
+		t.Fatalf("channel_c desc: got %q", result["channel_c.de"].Desc)
 	}
 }
