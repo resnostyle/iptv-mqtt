@@ -1,0 +1,6 @@
+bin/
+.env
+*.exe
+
+.pytest_cache/
+.venv/
