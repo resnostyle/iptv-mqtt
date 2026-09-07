@@ -1,0 +1,16 @@
+# Example sidecar next to Home Assistant / Mosquitto.
+# Copy env from .env.example.
+
+services:
+  iptv:
+    image: ghcr.io/resnostyle/iptv-mqtt:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   args:
+    #     SERVICE: iptv
+    #     RUNTIME: distroless
+    container_name: iptv-mqtt
+    restart: unless-stopped
+    env_file:
+      - .env
