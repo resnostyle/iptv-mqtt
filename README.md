@@ -4,8 +4,8 @@ Publishes IPTV now-playing data to MQTT for Home Assistant. Mirrors the [racing-
 
 ## What it does
 
-1. Loads all channels from your M3U playlist (mybunny.tv)
-2. Fetches bulk XMLTV EPG from the public mybunny.tv guide (`https://mybunny.tv/epg.xml` by default)
+1. Loads all channels from your M3U playlist
+2. Fetches bulk XMLTV EPG from the URL you configure
 3. Publishes retained JSON per channel to MQTT
 4. Registers Home Assistant MQTT discovery sensors (grouped by M3U `group-title`)
 
@@ -13,7 +13,7 @@ Publishes IPTV now-playing data to MQTT for Home Assistant. Mirrors the [racing-
 
 ```bash
 cp .env.example .env
-# Edit M3U_URL with your playlist credentials
+# Edit M3U_URL and EPG_XML_URL for your provider
 
 mise run iptv
 ```
@@ -29,7 +29,7 @@ docker compose up -d
 | Variable | Default | Description |
 |---|---|---|
 | `M3U_URL` | (required) | IPTV playlist URL (channel list) |
-| `EPG_XML_URL` | `https://mybunny.tv/epg.xml` | Public master XMLTV guide |
+| `EPG_XML_URL` | (required) | XMLTV guide URL |
 | `EPG_CACHE_TTL_SECONDS` | `900` | How long to cache the EPG download |
 | `MQTT_HOST` | `127.0.0.1` | MQTT broker |
 | `MQTT_PORT` | `1883` | MQTT port |
@@ -54,7 +54,7 @@ Slug is the channel `tvg-id` with `.` replaced by `_` (e.g. `espn.us` → `espn_
   "tvg_id": "espn.us",
   "name": "US: ESPN",
   "group": "US Sports",
-  "logo": "https://logo.m3uassets.com/espn.png",
+  "logo": "https://example.com/logos/espn.png",
   "title": "SportsCenter",
   "desc": "Live sports news and highlights.",
   "lang": "en",

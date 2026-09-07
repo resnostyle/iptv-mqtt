@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"strings"
 	"sync"
 	"time"
@@ -33,20 +32,6 @@ var (
 	cacheMu sync.Mutex
 	cache   = make(map[string]cacheEntry)
 )
-
-// URLFromM3U derives the XMLTV URL from M3U playlist credentials.
-func URLFromM3U(m3uURL string) (string, error) {
-	parsed, err := url.Parse(m3uURL)
-	if err != nil {
-		return "", err
-	}
-	user := parsed.Query().Get("u")
-	password := parsed.Query().Get("p")
-	if user == "" || password == "" {
-		return "", nil
-	}
-	return fmt.Sprintf("http://epg.mybunny.tv/btv/%s/%s", user, password), nil
-}
 
 // ParseXMLTVTime parses an XMLTV datetime string.
 func ParseXMLTVTime(value string) (time.Time, error) {

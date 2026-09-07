@@ -2,14 +2,10 @@ package iptv
 
 import (
 	"fmt"
-	"os"
-	"strings"
 	"time"
 
 	"github.com/resnostyle/mqttkit/env"
 )
-
-const defaultEPGXMLURL = "https://mybunny.tv/epg.xml"
 
 type Settings struct {
 	env.MQTT
@@ -29,9 +25,9 @@ func FromEnv() (Settings, error) {
 	if err != nil {
 		return Settings{}, err
 	}
-	epgXMLURL := strings.TrimSpace(os.Getenv("EPG_XML_URL"))
-	if epgXMLURL == "" {
-		epgXMLURL = defaultEPGXMLURL
+	epgXMLURL, err := env.Require("EPG_XML_URL")
+	if err != nil {
+		return Settings{}, err
 	}
 	poll, err := env.Int("IPTV_POLL_INTERVAL_SECONDS", 60)
 	if err != nil {

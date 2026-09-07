@@ -34,17 +34,6 @@ func TestParseXMLTVTime(t *testing.T) {
 	}
 }
 
-func TestURLFromM3U(t *testing.T) {
-	got, err := URLFromM3U("https://mybunny.tv/client/download.php?u=abc&p=secret")
-	if err != nil {
-		t.Fatal(err)
-	}
-	want := "http://epg.mybunny.tv/btv/abc/secret"
-	if got != want {
-		t.Fatalf("got %q want %q", got, want)
-	}
-}
-
 func TestParseNowPlaying(t *testing.T) {
 	now := time.Date(2026, 1, 1, 12, 45, 0, 0, time.UTC)
 	result, err := ParseNowPlaying(sampleXML, now)
